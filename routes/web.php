@@ -18,5 +18,15 @@ Route::view('contact', 'contact');
 Route::view('about', 'about');
 
 Route::get('customers', function () {
-    return view('internals.customers');
+
+    $customers = [
+        'Zawad',
+        'Monsur',
+        'K.M.',
+    ];
+
+
+    return view('internals.customers', [
+        'customers' => $customers,
+    ]);
 });
