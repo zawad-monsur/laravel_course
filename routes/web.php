@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,20 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'home');
 Route::view('contact', 'contact');
 Route::view('about', 'about');
 
-Route::get('customers', function () {
-
-    $customers = [
-        'Zawad',
-        'Monsur',
-        'K.M.',
-    ];
-
-
-    return view('internals.customers', [
-        'customers' => $customers,
-    ]);
-});
+Route::get('customers', [CustomersController::class, 'list']);
