@@ -1,10 +1,12 @@
 @extends('layout')
 
-@section('title', 'Customer')
+@section('title', 'Customers')
 
-@section('title')
+{{-- Same thing --}}
+
+{{-- @section('title')
     Customer List
-@endsection
+@endsection --}}
 
 @section('content')
     <div class="row">
@@ -53,6 +55,15 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="company_id">Company</label>
+                    <select name="company_id" id="company_id" class="form-control">
+                        @foreach ($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Add Customer</button>
 
                 @csrf
@@ -70,7 +81,8 @@
                 @foreach ($activeCustomers as $activeCustomer)
                     <li>
                         {{ $activeCustomer->name }}
-                        <span class="text-muted">({{ $activeCustomer->email }}|{{ $activeCustomer->number }})</span>
+                        <span
+                            class="text-muted">({{ $activeCustomer->company->name }}|{{ $activeCustomer->number }})</span>
                     </li>
                 @endforeach
             </ul>
@@ -86,6 +98,20 @@
                     </li>
                 @endforeach
             </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            @foreach ($companies as $company)
+                <h3>{{ $company->name }}</h3>
+
+                <ul>
+                    @foreach ($company->customers as $customer)
+                        <li>{{ $customer->name }}</li>
+                    @endforeach
+                </ul>
+            @endforeach
         </div>
     </div>
 @endsection
